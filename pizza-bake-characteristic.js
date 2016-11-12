@@ -1,6 +1,6 @@
 var util = require('util');
-var bleno = require('../..');
-var pizza = require('./pizza');
+var bleno = require('bleno');
+var hh = require('./hh');
 
 function PizzaBakeCharacteristic(pizza) {
   bleno.Characteristic.call(this, {

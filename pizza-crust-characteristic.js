@@ -1,6 +1,6 @@
 var util = require('util');
-var bleno = require('../..');
-var pizza = require('./pizza');
+var bleno = require('bleno');
+var hh = require('./hh');
 
 function PizzaCrustCharacteristic(pizza) {
   bleno.Characteristic.call(this, {
@@ -54,3 +54,7 @@ PizzaCrustCharacteristic.prototype.onReadRequest = function(offset, callback) {
 };
 
 module.exports = PizzaCrustCharacteristic;
+
+
+
+

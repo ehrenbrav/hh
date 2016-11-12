@@ -27,15 +27,15 @@ var PizzaBakeResult = {
   ON_FIRE:    4
 };
 
-function Pizza() {
+function Hammerhead() {
   events.EventEmitter.call(this);
   this.toppings = PizzaToppings.NONE;
   this.crust = PizzaCrust.NORMAL;
 }
 
-util.inherits(Pizza, events.EventEmitter);
+util.inherits(Hammerhead, events.EventEmitter);
 
-Pizza.prototype.bake = function(temperature) {
+Hammerhead.prototype.bake = function(temperature) {
   var time = temperature * 10;
   var self = this;
   console.log('baking pizza at', temperature, 'degrees for', time, 'milliseconds');
@@ -50,7 +50,11 @@ Pizza.prototype.bake = function(temperature) {
   }, time);
 };
 
-module.exports.Pizza = Pizza;
+module.exports.Hammerhead = Hammerhead;
 module.exports.PizzaToppings = PizzaToppings;
 module.exports.PizzaCrust = PizzaCrust;
 module.exports.PizzaBakeResult = PizzaBakeResult;
+
+
+
+

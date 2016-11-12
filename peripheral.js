@@ -1,29 +1,26 @@
 var util = require('util');
+var bleno = require('bleno');
 
-//
-// Require bleno peripheral library.
-// https://github.com/sandeepmistry/bleno
-//
-var bleno = require('../..');
+// A name to advertise our service.
+var name = 'HammerheadHH1';
 
-//
-// Pizza
-// * has crust
-// * has toppings
-// * can be baked
-//
-var pizza = require('./pizza');
+// Use a custom device name.
+process.env['BLENO_DEVICE_NAME'] = 'HammerheadHH1';
 
-//
-// The BLE Pizza Service!
-//
-var PizzaService = require('./pizza-service');
+// The device itself.
+var hh = require('./hh');
+var hh_device = new hh.Hammerhead();
 
-//
-// A name to advertise our Pizza Service.
-//
-var name = 'PizzaSquat';
-var pizzaService = new PizzaService(new pizza.Pizza());
+// Services that we'll run.
+var HHService = require('./hh-service');
+var hhService = new HHService(hh_device);
+var NameService = require('./name-service');
+var nameService = new NameService(hh_device);
+var ChangeService = require('./change-service');
+var changeService = new ChangeService(hh_device);
+var DeviceInfoService = require('./device-info-service');
+var deviceInfoService = new DeviceInfoService(hh_device);
+
 
 //
 // Wait until the BLE radio powers on before attempting to advertise.
@@ -35,7 +32,7 @@ bleno.on('stateChange', function(state) {
     // We will also advertise the service ID in the advertising packet,
     // so it's easier to find.
     //
-    bleno.startAdvertising(name, [pizzaService.uuid], function(err) {
+    bleno.startAdvertising(name, [hhService.uuid], function(err) {
       if (err) {
         console.log(err);
       }
@@ -54,7 +51,10 @@ bleno.on('advertisingStart', function(err) {
     // along with our characteristics.
     //
     bleno.setServices([
-      pizzaService
+        nameService, // Looks like we need to keep this enabled!
+        //changeService,
+        hhService,
+        deviceInfoService
     ]);
   }
 });
