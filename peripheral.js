@@ -16,11 +16,8 @@ var HHService = require('./hh-service');
 var hhService = new HHService(hh_device);
 var NameService = require('./name-service');
 var nameService = new NameService(hh_device);
-var ChangeService = require('./change-service');
-var changeService = new ChangeService(hh_device);
 var DeviceInfoService = require('./device-info-service');
 var deviceInfoService = new DeviceInfoService(hh_device);
-
 
 //
 // Wait until the BLE radio powers on before attempting to advertise.
@@ -51,8 +48,7 @@ bleno.on('advertisingStart', function(err) {
     // along with our characteristics.
     //
     bleno.setServices([
-        nameService, // Looks like we need to keep this enabled!
-        //changeService,
+        //nameService, // Looks like we need to keep this enabled!
         hhService,
         deviceInfoService
     ]);

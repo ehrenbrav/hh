@@ -5,13 +5,7 @@ var hh = require('./hh');
 function LightCharacteristic(hh) {
   bleno.Characteristic.call(this, {
     uuid: '754d0003d49225ad29498e904f2f3869',
-    properties: ['read'],
-    //descriptors: [
-    //  new bleno.Descriptor({
-    //    uuid: '2901',
-    //   value: 'Gets or sets the type of pizza crust.'
-    //  })
-    //]
+    properties: ['notify', 'read'],
   });
 
   this.hh = hh;
@@ -20,13 +14,12 @@ function LightCharacteristic(hh) {
 util.inherits(LightCharacteristic, bleno.Characteristic);
 
 LightCharacteristic.prototype.onReadRequest = function(offset, callback) {
+    console.log("HIT: LightCharacteristic Read.");
   if (offset) {
     callback(this.RESULT_ATTR_NOT_LONG, null);
   }
   else {
-    var data = new Buffer(14);
-    data.string('light_read', 0);
-    console.log("Read: LightCharacteristic.");
+    const data = Buffer.from("hi", "ascii");
     callback(this.RESULT_SUCCESS, data);
   }
 };

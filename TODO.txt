@@ -1,1 +1,0 @@
-Change advertising type from public to random
