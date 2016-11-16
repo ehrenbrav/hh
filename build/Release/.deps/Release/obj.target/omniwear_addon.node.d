@@ -1,0 +1,1 @@
+cmd_Release/obj.target/omniwear_addon.node := g++ -shared -pthread -rdynamic -m64  -Wl,-soname=omniwear_addon.node -o Release/obj.target/omniwear_addon.node -Wl,--start-group Release/obj.target/omniwear_addon/omniwear_wrapper.o -Wl,--end-group -lomniwear_sdk
