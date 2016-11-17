@@ -12,8 +12,7 @@ namespace omni_wrapper {
         using v8::Value;
         using v8::Persistent;
 
-        //Omniwear::DeviceP handle = 0x0;
-        Persistent<Omniwear::DeviceP> persist;
+        Omniwear::DeviceP handle = 0x0;
 
         // Open the haptic device.
         void open(const FunctionCallbackInfo<Value>& args) {
@@ -27,20 +26,15 @@ namespace omni_wrapper {
                         return;
                 }
 
-                // Open the device.
-                printf("Opening haptic device.\n");
-                Omniwear::DeviceP handle = Omniwear::open();
-                persist = Persistent<Omniwear::DeviceP>::New(handle);
+                // Open the device if not already open.
+                if (handle.get() == 0x0) {
+                        printf("Opening haptic device.\n");
+                        handle = Omniwear::open();
 
-                // If successful, return true;
-                if (handle) {
-                        args.GetReturnValue().Set(true);
-
-                        // DEBUG
-                        printf("Got handle: %#08x\n", handle.get());
-                } else {
-                        printf("Could not open haptic device.\n");
-                        args.GetReturnValue().Set(false);
+                        // If successful, return true;
+                        if (handle.get() == 0x0) {
+                                printf("Could not open haptic device.\n");
+                        }
                 }
         }
 
@@ -56,14 +50,16 @@ namespace omni_wrapper {
                         return;
                 }
 
-                // Reset the device.
-                printf("Resetting haptic device.\n");
-                bool ret = Omniwear::reset_motors((Omniwear::Device*)&handle);
+                // Reset the device if present.
+                if (handle.get() != 0x0) {
+                        printf("Resetting haptic device.\n");
+                        bool ret = Omniwear::reset_motors(handle.get());
 
-                // Error handle.
-                if (ret) {
-                        printf("Error resetting haptic device.\n");
-                        return;
+                        // Error handle.
+                        if (ret) {
+                                printf("Error resetting haptic device.\n");
+                                return;
+                        }
                 }
         }
 
@@ -78,11 +74,10 @@ namespace omni_wrapper {
                         return;
                 }
 
-                // Run the motor.
-
-                // DEBUG
-                printf("Sending pointer: %#08x\n", handle.get());
-                Omniwear::configure_motor((Omniwear::Device*)&handle, args[0]->NumberValue(), args[1]->NumberValue());
+                // Run the motor if device is present.
+                if (handle.get() != 0x0) {
+                        Omniwear::configure_motor(handle.get(), args[0]->NumberValue(), args[1]->NumberValue());
+                }
         }
 
         void init(Local<Object> exports) {
@@ -91,6 +86,8 @@ namespace omni_wrapper {
                 NODE_SET_METHOD(exports, "reset_motors", reset_motors);
                 NODE_SET_METHOD(exports, "configure_motor", configure_motor);
         }
+
+        NODE_MODULE(omniwear_addon, init)
         
 } // namespace
 

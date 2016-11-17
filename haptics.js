@@ -27,14 +27,14 @@ function Buzz(motor, duration_ms) {
 
     // Turn off.
     setTimeout(function() {
-        sdk.configure_motor(motor, 0), duration_ms});
+        sdk.configure_motor(motor, 0)}, duration_ms);
 }
 
 function BuzzAll(duration_ms) {
     for (var motor = 0; motor < NUM_MOTORS; motor++) {
         sdk.configure_motor(motor, 100);
         setTimeout(function() {
-            sdk.configure_motor(motor, 0), duration_ms});
+            sdk.configure_motor(motor, 0)}, duration_ms);
     }
 }
 

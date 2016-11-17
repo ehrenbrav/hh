@@ -95,11 +95,11 @@ StatusCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
             break;
         case 0x07:
             console.log("Straight");
-            haptics.Buzz(haptics.MOTOR.FRONT, 250);
+            haptics.Buzz(haptics.MOTOR.FRONT, 500);
             break;
         case 0x08:
             console.log("Reverse");
-            haptics.Buzz(haptics.MOTOR.BACK, 250);
+            haptics.Buzz(haptics.MOTOR.BACK, 500);
             break;
         case 0x09:
             console.log("Ramp Right");
