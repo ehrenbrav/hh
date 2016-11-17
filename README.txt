@@ -1,11 +1,21 @@
 Dependencies
 ============
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+sudo apt-get install nodejs
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+Disable bluetoothd:
+sudo systemctl disable bluetooth
+
 In the directory above the root directory of the hh project, execute the following:
 git clone https://github.com/ehrenbrav/omniwear-driver.git
 
 In the omniwear-driver directory, build the driver using make, then:
 sudo cp o/libomniwear_sdk.so /usr/local/lib
 sudo ldconfig
+
+Install the node dependencies:
+npm install bleno
 
 Build the addon, using the following from the root directory:
 node-gyp configure
