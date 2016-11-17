@@ -14,7 +14,6 @@ function LightCharacteristic(hh) {
 util.inherits(LightCharacteristic, bleno.Characteristic);
 
 LightCharacteristic.prototype.onReadRequest = function(offset, callback) {
-    console.log("HIT: LightCharacteristic Read.");
   if (offset) {
     callback(this.RESULT_ATTR_NOT_LONG, null);
   }

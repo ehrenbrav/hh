@@ -31,7 +31,7 @@ namespace omni_wrapper {
                         printf("Opening haptic device.\n");
                         handle = Omniwear::open();
 
-                        // If successful, return true;
+                        // Handle errors.
                         if (handle.get() == 0x0) {
                                 printf("Could not open haptic device.\n");
                         }
