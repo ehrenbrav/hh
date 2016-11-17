@@ -74,10 +74,15 @@ namespace omni_wrapper {
                         return;
                 }
 
-                // Run the motor if device is present.
+                // Run the motor if device is present; otherwise try to open.
                 if (handle.get() != 0x0) {
-                        Omniwear::configure_motor(handle.get(), args[0]->NumberValue(), args[1]->NumberValue());
+                        bool ret = Omniwear::configure_motor(handle.get(), args[0]->NumberValue(), args[1]->NumberValue());
+                        // Handle write failures.
+                        if (ret) {handle = 0x0;}
                 }
+                
+                // Reconnect if necessary...
+                if (handle.get() == 0x0) {handle = Omniwear::open();}
         }
 
         void init(Local<Object> exports) {

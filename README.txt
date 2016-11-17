@@ -16,6 +16,7 @@ sudo ldconfig
 
 Install the node dependencies:
 npm install bleno
+sudo npm install -g node-gyp
 
 Build the addon, using the following from the root directory:
 node-gyp configure

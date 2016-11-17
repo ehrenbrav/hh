@@ -48,9 +48,16 @@ bleno.on('advertisingStart', function(err) {
     // along with our characteristics.
     //
     bleno.setServices([
-        //nameService, // Looks like we need to keep this enabled!
         hhService,
         deviceInfoService
     ]);
   }
+});
+
+bleno.on('disconnect', function(clientAddress) {
+    console.log("Disconnect from: ", clientAddress);
+});
+
+bleno.on('accept', function(clientAddress) {
+    console.log("Connection from: ", clientAddress);
 });
