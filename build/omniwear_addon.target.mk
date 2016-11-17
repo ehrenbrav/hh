@@ -37,7 +37,8 @@ INCS_Debug := \
 	-I/home/ehrenbrav/.node-gyp/7.1.0/include/node \
 	-I/home/ehrenbrav/.node-gyp/7.1.0/src \
 	-I/home/ehrenbrav/.node-gyp/7.1.0/deps/uv/include \
-	-I/home/ehrenbrav/.node-gyp/7.1.0/deps/v8/include
+	-I/home/ehrenbrav/.node-gyp/7.1.0/deps/v8/include \
+	-I$(srcdir)/../omniwear-driver
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=omniwear_addon' \
@@ -72,7 +73,8 @@ INCS_Release := \
 	-I/home/ehrenbrav/.node-gyp/7.1.0/include/node \
 	-I/home/ehrenbrav/.node-gyp/7.1.0/src \
 	-I/home/ehrenbrav/.node-gyp/7.1.0/deps/uv/include \
-	-I/home/ehrenbrav/.node-gyp/7.1.0/deps/v8/include
+	-I/home/ehrenbrav/.node-gyp/7.1.0/deps/v8/include \
+	-I$(srcdir)/../omniwear-driver
 
 OBJS := \
 	$(obj).target/$(TARGET)/omniwear_wrapper.o

@@ -7,6 +7,9 @@
         "omniwear.h",
         "hid.h"
       ],
+      "include_dirs": [
+        "../omniwear-driver"
+      ],
       "libraries": [
         "-lomniwear_sdk"
       ]
