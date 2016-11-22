@@ -61,7 +61,7 @@ StatusCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
             break;
         case 0x07:
             console.log("Reached Destination");
-            haptics.BuzzAll(750);
+            haptics.BuzzAll(200);
             break;
         default:
             console.log("Unknown White", data);
@@ -89,17 +89,21 @@ StatusCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
             break;
         case 0x05:
             console.log("U-turn Right");
+            haptics.Buzz(haptics.MOTOR.RIGHT, 500);
+            haptics.Buzz(haptics.MOTOR.BACK, 500);
             break;
         case 0x06:
             console.log("U-turn Left");
+            haptics.Buzz(haptics.MOTOR.LEFT, 500);
+            haptics.Buzz(haptics.MOTOR.BACK, 500);
             break;
         case 0x07:
             console.log("Straight");
-            haptics.Buzz(haptics.MOTOR.FRONT, 500);
+            haptics.Buzz(haptics.MOTOR.FRONT, 150);
             break;
         case 0x08:
             console.log("Reverse");
-            haptics.Buzz(haptics.MOTOR.BACK, 500);
+            haptics.Buzz(haptics.MOTOR.BACK, 150);
             break;
         case 0x09:
             console.log("Ramp Right");
@@ -115,13 +119,13 @@ StatusCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
             break;
         case 0x0d:
             console.log("Upcoming Turn on Right");
-            haptics.Buzz(haptics.MOTOR.RIGHT, 250);
-            haptics.Buzz(haptics.MOTOR.FRONT, 250);
+            haptics.Buzz(haptics.MOTOR.RIGHT, 150);
+            haptics.Buzz(haptics.MOTOR.FRONT, 150);
             break;
         case 0x0e:
             console.log("Upcoming Turn on Left");
-            haptics.Buzz(haptics.MOTOR.LEFT, 250);
-            haptics.Buzz(haptics.MOTOR.FRONT, 250);
+            haptics.Buzz(haptics.MOTOR.LEFT, 150);
+            haptics.Buzz(haptics.MOTOR.FRONT, 150);
             break;
         default:
             console.log('Unknown', data);
